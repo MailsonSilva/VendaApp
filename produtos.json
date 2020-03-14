@@ -1,0 +1,34 @@
+[
+	{
+		"pro_codigo"		    : 1,
+		"pro_descricao"     : "Arroz Maria",
+		"pro_valor"         : 3.90,
+		"pro_estoque"       : 100,
+		"pro_departamento"  : "Alimentos",
+		"pro_unidade"       : "KG"
+	},
+	{
+		"pro_codigo"				: 2,
+		"pro_descricao"     : "Feijão Maria",
+		"pro_valor"         : 7.90,
+		"pro_estoque"       : 150,
+		"pro_departamento"  : "Alimentos",
+		"pro_unidade"       : "KG"	
+	},
+	{
+		"pro_codigo"				: 3,
+		"pro_descricao"     : "Macarrão D+",
+		"pro_valor"         : 2.99,
+		"pro_estoque"       : 110,
+		"pro_departamento"  : "Alimentos",
+		"pro_unidade"       : "GR"	
+	},
+	{
+		"pro_codigo"				: 4,
+		"pro_descricao"     : "Açucar Doce",
+		"pro_valor"         : 3.49,
+		"pro_estoque"       : 123,
+		"pro_departamento"  : "Alimentos",
+		"pro_unidade"       : "KG"	
+	}
+]
