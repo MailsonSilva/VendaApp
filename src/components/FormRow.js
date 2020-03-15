@@ -17,18 +17,13 @@ const FormRow = props => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
-    backgroundColor: '#FFF',
-    marginTop: 5,
-    marginBottom: 5,
-    elevation: 1,
-    borderRadius: 5,
+    backgroundColor: '#113063',
   },
   first: {
-    marginTop: 10,
+    marginTop: 50,
   },
   last: {
-    marginBottom: 10,
+    marginBottom: 5,
   },
 });
 

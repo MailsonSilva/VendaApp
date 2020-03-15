@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import firebase from 'firebase';
 import 'firebase/auth';
-import FormRow from '../components/FormRow';
 import {connect} from 'react-redux';
 import {tryLogin} from '../actions';
 
@@ -56,7 +55,7 @@ class LoginScreen extends React.Component {
       .tryLogin({email, password})
       .then(user => {
         if (user) {
-          this.props.navigation.replace('CadastroPage');
+          this.props.navigation.replace('Main');
         }
         this.setState({
           isLoading: false,
@@ -111,27 +110,26 @@ class LoginScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <FormRow first>
-          <TextInput
-            style={styles.input}
-            placeholder="e-mail"
-            value={this.state.mail}
-            onChangeText={value => this.onChangeHandler('mail', value)}
-            keyboardType="email-address"
-            autoCapitalize="none"
-            autoCorrect={false}
-          />
-        </FormRow>
-        <FormRow last>
-          <TextInput
-            style={styles.input}
-            placeholder="******"
-            secureTextEntry
-            value={this.state.password}
-            onChangeText={value => this.onChangeHandler('password', value)}
-          />
-        </FormRow>
-        {this.renderButon()}
+        <TextInput
+          style={styles.input}
+          placeholder="e-mail"
+          value={this.state.mail}
+          onChangeText={value => this.onChangeHandler('mail', value)}
+          keyboardType="email-address"
+          autoCapitalize="none"
+          autoCorrect={false}
+          placeholderTextColor="#153973"
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="******"
+          secureTextEntry
+          value={this.state.password}
+          onChangeText={value => this.onChangeHandler('password', value)}
+          placeholderTextColor="#153973"
+        />
+        <View style={styles.botton}>{this.renderButon()}</View>
         {this.renderMensage()}
       </View>
     );
@@ -140,13 +138,23 @@ class LoginScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingLeft: 10,
-    paddingRight: 10,
+    flex: 1,
+    marginHorizontal: 20,
+    justifyContent: 'center',
+    marginBottom: 50,
   },
   input: {
-    paddingLeft: 5,
-    paddingRight: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
     fontSize: 20,
+    marginTop: 10,
+    borderWidth: 1,
+    borderColor: '#153973',
+    borderRadius: 15,
+  },
+  botton: {
+    marginTop: 10,
+    marginBottom: 10,
   },
 });
 

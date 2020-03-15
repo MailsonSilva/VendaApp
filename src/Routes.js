@@ -1,7 +1,8 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import CadastroPage from './pages/CadastroPage';
 import LoginScreen from './pages/LoginScreen';
+import CadastroPage from './pages/CadastroPage';
+import Main from './pages/Main';
 const Stack = createStackNavigator();
 
 export default function Routes() {
@@ -23,6 +24,17 @@ export default function Routes() {
           headerTitleAlign: 'center',
           headerTitleStyle: {
             fontSize: 30,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="Main"
+        component={Main}
+        options={{
+          title: 'VendasApp',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 25,
           },
         }}
       />
