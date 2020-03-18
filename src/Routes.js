@@ -2,6 +2,7 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import LoginScreen from './pages/LoginScreen';
 import CadastroPage from './pages/CadastroPage';
+import VendaPage from './pages/VendaPage';
 import Main from './pages/Main';
 const Stack = createStackNavigator();
 
@@ -43,6 +44,17 @@ export default function Routes() {
         component={CadastroPage}
         options={{
           title: 'Cadastro de Produto',
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 25,
+          },
+        }}
+      />
+      <Stack.Screen
+        name="VendaPage"
+        component={VendaPage}
+        options={{
+          title: 'Carrinho',
           headerTitleAlign: 'center',
           headerTitleStyle: {
             fontSize: 25,

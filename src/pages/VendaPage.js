@@ -5,7 +5,7 @@ import {
   TextInput,
   StyleSheet,
   ScrollView,
-  Picker,
+  Text,
   ActivityIndicator,
   Alert,
 } from 'react-native';
@@ -31,7 +31,7 @@ class CadastroPage extends React.Component {
           <FormRow first>
             <TextInput
               style={styles.inputPro}
-              placeholder="Descrição"
+              placeholder="Produto"
               placeholderTextColor="#91a9cf"
               autoCapitalize="words"
               value={cadPro.pro_descricao}
@@ -39,55 +39,13 @@ class CadastroPage extends React.Component {
             />
           </FormRow>
           <FormRow>
-            <TextInput
-              style={styles.inputPro}
-              placeholder="Valor"
-              placeholderTextColor="#91a9cf"
-              keyboardType="decimal-pad"
-              value={cadPro.pro_valor}
-              onChangeText={value => setField('pro_valor', value)}
-            />
-          </FormRow>
-          <FormRow>
-            <TextInput
-              style={styles.inputPro}
-              placeholder="Estoque"
-              placeholderTextColor="#91a9cf"
-              keyboardType="decimal-pad"
-              value={cadPro.pro_estoque}
-              onChangeText={value => {
-                setField('pro_estoque', value);
-              }}
-            />
-          </FormRow>
-          <FormRow>
-            <View style={styles.inputPicker}>
-              <Picker
-                style={styles.picker}
-                selectedValue={cadPro.pro_departamento}
-                onValueChange={itemValue =>
-                  setField('pro_departamento', itemValue)
-                }>
-                <Picker.Item label="Alimentos" value="Alimentos" />
-                <Picker.Item label="Higiene" value="Higiene" />
-                <Picker.Item label="Frios" value="Frios" />
-                <Picker.Item label="Papelaria" value="Papelaria" />
-                <Picker.Item label="Bomboniere" value="Bomboniere" />
-              </Picker>
+            <View style={styles.viewButton}>
+              <Button title={'Adicionar'} />
             </View>
           </FormRow>
           <FormRow>
-            <View style={styles.inputPicker}>
-              <Picker
-                style={styles.picker}
-                selectedValue={cadPro.pro_unidade}
-                onValueChange={itemValue => setField('pro_unidade', itemValue)}>
-                <Picker.Item label="KG" value="KG" />
-                <Picker.Item label="UN" value="UN" />
-                <Picker.Item label="GR" value="GR" />
-                <Picker.Item label="ML" value="LT" />
-                <Picker.Item label="CX" value="CX" />
-              </Picker>
+            <View style={styles.inputForm}>
+              <Text>teste</Text>
             </View>
           </FormRow>
         </View>
@@ -141,19 +99,15 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginHorizontal: 25,
   },
-  inputPicker: {
+  inputForm: {
     marginLeft: 25,
     marginRight: 25,
     marginTop: 10,
+    paddingBottom: 300,
     borderRadius: 10,
     borderColor: '#FFF',
     borderWidth: 1,
     backgroundColor: '#113063',
-  },
-  picker: {
-    fontSize: 20,
-    width: '100%',
-    color: '#FFF',
   },
   marginFooter: {marginBottom: 10},
 });

@@ -12,7 +12,11 @@ export default class Main extends Component {
             color={'#d49d08'}
             onPress={() => navigation.navigate('CadastroPage')}
           />
-          <Button title={'Carrinho'} color={'#1c691c'} />
+          <Button
+            title={'Carrinho'}
+            color={'#1c691c'}
+            onPress={() => navigation.navigate('VendaPage')}
+          />
         </View>
       </View>
     );
