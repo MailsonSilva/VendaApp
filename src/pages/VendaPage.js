@@ -7,8 +7,16 @@ import {
   FlatList,
   Text,
 } from 'react-native';
-import {connect} from 'react-redux';
+
+import FormRow from '../components/FormRow';
+import { connect } from 'react-redux';
+import { setField, salvarProduto } from '../actions';
+
+import _ from 'lodash'
+import { TouchableOpacity } from 'react-native';
+
 import SearchBar from 'react-native-search-bar';
+
 
 class VendaPage extends React.Component {
   constructor(props) {
@@ -16,29 +24,122 @@ class VendaPage extends React.Component {
 
     this.state = {
       isLoading: false,
+      produtosSearched: [],
+      // produtos a serem adicionados
+      // deveria ser colocado no state do redux (?)
+      produtosCarrinho: []
     };
   }
 
+  // simulação dos produtos
+  // caso usar api, não é necessário armazenar em memória
+  // sugestão: criar algo do tipo: produto = {descricao, id} em vez de: produto = {pro_codigo, prod_descricao}
+  produtos = require("../../produtos.json")
+
+  searchProdutos = _.debounce((term) => {
+    term = term.toLowerCase()
+    // faz busca via js
+    // depois é necessário fazer busca via api
+    this.setState({
+      produtosSearched: this.produtos.filter(produto => produto.pro_descricao.toLowerCase().includes(term))
+    })
+  }, 500)
+
+  addProduto = (produto) => {
+    this.setState({
+      produtosCarrinho: [...this.state.produtosCarrinho, produto]
+    })
+  }
+
   render() {
-    const {produtos} = this.props;
+
+    const { cadPro, setField } = this.props;
+
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.search}>
-          <SearchBar placeholder="Pesquisa" />
+        <View>
+          <FormRow first>
+            <TextInput
+              style={styles.inputPro}
+              placeholder="Produto"
+              placeholderTextColor="#91a9cf"
+              autoCapitalize="words"
+              value={cadPro.pro_descricao}
+              onChangeText={this.searchProdutos}
+
+            />
+          </FormRow>
+          {!!this.state.produtosSearched.length && <View
+            style={{
+              backgroundColor: 'white',
+              width: '100%',
+            }}
+          >
+            {this.state.produtosSearched.map((produto) => {
+              // faz a renderização dos produtos filtrados a partir da busca
+              // customizar...
+              return <TouchableOpacity
+                onPress={() => {
+                  // add no carrinho
+                  this.addProduto(produto)
+                }}
+                key={produto.pro_codigo}
+              >
+                <Text
+                  style={{
+                    fontSize: 20,
+                    padding: 10,
+                    textAlign: 'center'
+                  }}
+                >
+                  {produto.pro_descricao}
+                </Text>
+              </TouchableOpacity>
+            })}
+          </View>}
+          {/* <FormRow>
+              <View style={styles.viewButton}>
+                <Button title={'Adicionar'} />
+              </View>
+            </FormRow> */}
+          <FormRow>
+            <View style={styles.inputForm}>
+              {/* <Text>teste</Text> */}
+              {this.state.produtosCarrinho.map((produto) => {
+                // renderização dos produtos no carrinho
+                return <Text key={produto.pro_codigo} style={{
+                  color: 'white',
+                  fontSize: 20,
+                  padding: 10,
+                }}>
+                  {produto.pro_descricao}
+                </Text>
+              })}
+            </View>
+          </FormRow>
         </View>
         <View style={styles.viewButton}>
-          <Button title={'Adicionar'} />
-        </View>
-
-        <View style={styles.inputForm}>
-          <FlatList
-            data={[...produtos]}
-            renderItem={({item}) => (
-              <View>
-                <Text>{`${item.pro_descricao}`}</Text>
-              </View>
+          {this.state.isLoading ? (
+            <ActivityIndicator size="large" color="#FFF" />
+          ) : (
+              <Button
+                title={'Salvar'}
+                color={'green'}
+                onPress={async () => {
+                  this.setState({ isLoading: true });
+                  try {
+                    // agora é possível pegar os produtos do carrinho e salvar aqui
+                    const { cadPro, salvarProduto } = this.props;
+                    await salvarProduto(cadPro);
+                    //   navigation.goBack(); .volta a página anterior.;
+                  } catch (error) {
+                    Alert.alert('Erro!', error.message);
+                  } finally {
+                    this.setState({ isLoading: false });
+                  }
+                }}
+              />
             )}
-          />
         </View>
         <View style={styles.marginFooter} />
       </ScrollView>
@@ -72,8 +173,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: '#113063',
   },
-
-  marginFooter: {marginBottom: 10},
+  marginFooter: { marginBottom: 10 },
 });
 
 const mapStateToProps = state => {
