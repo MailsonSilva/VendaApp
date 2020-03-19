@@ -41,7 +41,7 @@ class CadastroPage extends React.Component {
     this.setState({
       produtosSearched: this.produtos.filter(produto => produto.pro_descricao.toLowerCase().includes(term))
     })
-  })
+  }, 500)
 
   addProduto = (produto) => {
     this.setState({
