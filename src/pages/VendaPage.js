@@ -2,13 +2,12 @@ import React from 'react';
 import {
   View,
   Button,
-  TextInput,
   StyleSheet,
   ScrollView,
+  FlatList,
   Text,
-  ActivityIndicator,
-  Alert,
 } from 'react-native';
+
 import FormRow from '../components/FormRow';
 import { connect } from 'react-redux';
 import { setField, salvarProduto } from '../actions';
@@ -16,7 +15,10 @@ import { setField, salvarProduto } from '../actions';
 import _ from 'lodash'
 import { TouchableOpacity } from 'react-native';
 
-class CadastroPage extends React.Component {
+import SearchBar from 'react-native-search-bar';
+
+
+class VendaPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -50,6 +52,7 @@ class CadastroPage extends React.Component {
   }
 
   render() {
+
     const { cadPro, setField } = this.props;
 
     return (
@@ -65,7 +68,6 @@ class CadastroPage extends React.Component {
               onChangeText={this.searchProdutos}
 
             />
-
           </FormRow>
           {!!this.state.produtosSearched.length && <View
             style={{
@@ -140,7 +142,7 @@ class CadastroPage extends React.Component {
             )}
         </View>
         <View style={styles.marginFooter} />
-      </ScrollView >
+      </ScrollView>
     );
   }
 }
@@ -150,28 +152,22 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#113063',
   },
-  inputPro: {
-    fontSize: 18,
-    padding: 10,
+  search: {
     marginLeft: 25,
     marginRight: 25,
     marginTop: 10,
-    borderRadius: 10,
-    borderColor: '#FFF',
-    borderWidth: 1,
-    backgroundColor: '#113063',
-    color: '#FFF',
   },
   viewButton: {
     justifyContent: 'space-evenly',
-    marginTop: 15,
+    marginTop: 10,
     marginHorizontal: 25,
   },
   inputForm: {
     marginLeft: 25,
     marginRight: 25,
     marginTop: 10,
-    paddingBottom: 300,
+    padding: 10,
+    paddingBottom: '90%',
     borderRadius: 10,
     borderColor: '#FFF',
     borderWidth: 1,
@@ -180,18 +176,9 @@ const styles = StyleSheet.create({
   marginFooter: { marginBottom: 10 },
 });
 
-function mapStateToProps(state) {
-  return {
-    cadPro: state.cadPro,
-  };
-}
-
-const mapDispatchToProps = {
-  setField,
-  salvarProduto,
+const mapStateToProps = state => {
+  const {produtos} = state;
+  return {produtos};
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(CadastroPage);
+export default connect(mapStateToProps)(VendaPage);

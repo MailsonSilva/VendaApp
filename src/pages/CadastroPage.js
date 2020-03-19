@@ -34,8 +34,8 @@ class CadastroPage extends React.Component {
               placeholder="Descrição"
               placeholderTextColor="#91a9cf"
               autoCapitalize="words"
-              value={cadPro.pro_descricao}
               onChangeText={value => setField('pro_descricao', value)}
+              value={cadPro.pro_descricao}
             />
           </FormRow>
           <FormRow>
@@ -44,8 +44,8 @@ class CadastroPage extends React.Component {
               placeholder="Valor"
               placeholderTextColor="#91a9cf"
               keyboardType="decimal-pad"
-              value={cadPro.pro_valor}
               onChangeText={value => setField('pro_valor', value)}
+              value={cadPro.pro_valor}
             />
           </FormRow>
           <FormRow>
@@ -54,10 +54,10 @@ class CadastroPage extends React.Component {
               placeholder="Estoque"
               placeholderTextColor="#91a9cf"
               keyboardType="decimal-pad"
-              value={cadPro.pro_estoque}
               onChangeText={value => {
                 setField('pro_estoque', value);
               }}
+              value={cadPro.pro_estoque}
             />
           </FormRow>
           <FormRow>
