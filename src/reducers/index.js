@@ -6,5 +6,5 @@ import vendaReducer from './vendaReducer';
 export default combineReducers({
   user: userReducer,
   cadPro: cadProReducer,
-  produtos: vendaReducer,
+  produto: vendaReducer,
 });
