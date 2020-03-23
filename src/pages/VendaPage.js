@@ -6,6 +6,7 @@ import {
   FlatList,
   Text,
   ActivityIndicator,
+  ScrollView,
 } from 'react-native';
 
 import {connect} from 'react-redux';
@@ -30,7 +31,6 @@ class VendaPage extends React.Component {
     <View style={styles.viewList}>
       <Text style={styles.textItens}>{item.pro_descricao}</Text>
       <Text style={styles.textItens}>{1}</Text>
-      <Text style={styles.textItens}>{item.pro_estoque}</Text>
       <Text style={styles.textItens}>{item.pro_valor}</Text>
       <Text style={styles.textItens}>{item.pro_valor}</Text>
     </View>
@@ -40,7 +40,7 @@ class VendaPage extends React.Component {
     const {produto} = this.props;
 
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={styles.search}>
           <SearchBar
             placeholder="Produto"
@@ -55,9 +55,8 @@ class VendaPage extends React.Component {
           <View style={styles.viewItens}>
             <Text style={styles.textItens}>Descrição</Text>
             <Text style={styles.textItens}>Quant.</Text>
-            <Text style={styles.textItens}>Unid.</Text>
-            <Text style={styles.textItens}>Vlr. Unit</Text>
-            <Text style={styles.textItens}>Vlr. Total</Text>
+            <Text style={styles.textItens}>Vlr.Unit</Text>
+            <Text style={styles.textItens}>Vlr.Total</Text>
           </View>
 
           <FlatList
@@ -72,11 +71,11 @@ class VendaPage extends React.Component {
           {this.state.isLoading ? (
             <ActivityIndicator size="large" color="#FFF" />
           ) : (
-            <Button title={'Salvar'} />
+            <Button title={'Salvar'} color={'#1c691c'} />
           )}
         </View>
         <View style={styles.marginFooter} />
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -87,18 +86,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#113063',
   },
   search: {
-    marginLeft: 25,
-    marginRight: 25,
+    marginLeft: 10,
+    marginRight: 10,
     marginTop: 10,
   },
   viewButton: {
     justifyContent: 'space-evenly',
     marginTop: 10,
-    marginHorizontal: 25,
+    marginHorizontal: 10,
   },
   inputForm: {
-    marginLeft: 25,
-    marginRight: 25,
+    marginLeft: 10,
+    marginRight: 10,
     marginTop: 10,
 
     borderRadius: 10,
@@ -114,15 +113,16 @@ const styles = StyleSheet.create({
   },
   viewList: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignSelf: 'stretch',
+    justifyContent: 'space-between',
   },
   textItens: {
-    fontSize: 20,
+    fontSize: 12,
+    fontWeight: 'bold',
     color: '#FFF',
     margin: 10,
+    fontFamily: 'Courier New',
   },
-  marginFooter: {marginBottom: 10},
+  marginFooter: {marginBottom: 20},
 });
 
 const mapStateToProps = state => {
